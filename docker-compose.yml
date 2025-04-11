@@ -7,5 +7,4 @@ services:
     volumes:
       - ./app/.:/usr/src/myapp
     working_dir: /usr/src/myapp
-    command: sh -c "pip install Flask && python home.py"
-    
+    command: sh -c "pip install -r ./requirements.txt && flask run --host=0.0.0.0"    
