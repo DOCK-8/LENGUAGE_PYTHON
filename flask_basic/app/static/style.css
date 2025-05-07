@@ -1,0 +1,33 @@
+#nav-header{
+  background: #000;
+  color: #fff;
+  padding: .3em 1em;
+}
+#nav-header > ul{
+  display: flex;
+  justify-content: end;
+  gap: 3em;
+  list-style-type: none;
+  letter-spacing: .1em;
+  font-family: sans-serif;
+}
+#nav-header > ul > li:hover{
+  text-decoration: underline;
+  color: #DDD;
+}
+main{
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+#nav-courses{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  background: linear-gradient(to left,#0005, transparent, #0005);
+}
+#nav-students{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}

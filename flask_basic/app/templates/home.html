@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel = stylesheet href = "{{url_for('static', filename='style.css')}}">
+    <!-- <link rel = "stylesheet" href = "style.css"> -->
+    <meta charset = "UTF-8">
+  </head>
+  <body>
+    <header>
+      <div id = "nav-header">
+        <ul>
+          <li>
+            <a href = "/matricula">MATRICULAR</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <main>
+      <div id = "nav-courses">
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>CREDITS</th>
+            <th>PRE-REQUIS</th>
+          </tr>
+          {%for curso in courses %}
+          <tr>
+            <td>{{curso[0]}}</td>
+            <td>{{curso[1]}}</td>
+            <td>{{curso[2]}}</td>
+            <td>{{curso[3]}}</td>
+          </tr>
+          {%endfor%}
+        </table>
+      </div>
+      <div id = "nav-students">
+        <table>
+          <tr>
+            <th>DNI</th>
+            <th>NAMES AND LASTNAME</th>
+          </tr>
+          {%for alumno in students %}
+          <tr>
+            <td>{{alumno[0]}}</td>
+            <td>{{alumno[1]}}</td>
+          </tr>
+          {%endfor%}
+        </table>
+      </div>
+      <div id = "nav-matriculas">
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>DNI</th>
+            <th>COURSE</th>
+            <th>DATE</th>
+          </tr>
+          {%for matricula in matriculas %}
+          <tr>
+            <td>{{matricula[0]}}</td>
+            <td>{{matricula[1]}}</td>
+            <td>{{matricula[2]}}</td>
+            <td>{{matricula[3]}}</td>
+          </tr>
+          {%endfor%}
+        </table>
+      </div>
+    </main>
+  </body>
+</html>
