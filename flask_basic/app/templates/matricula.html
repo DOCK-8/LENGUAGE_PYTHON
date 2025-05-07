@@ -4,25 +4,30 @@
   <link rel = "stylesheet" href = "url_for('static', filename='style.css')">
 </head>
 <body>
-  <form>
-    <input type = "number" name = "dni">
-    <input type = "submit">
+  <form method = "POST" action = "{{url_for('dni')}}">
+    <input type = "number" name = "dni" placeholder = "Documento de Identidad">
+    <input type = "submit" value = "BUSCAR">
   </form>
-  <div class = "out-information"></div>
-  <div class = "out-information"></div>
-  <div class = "out-information"></div>
+  {% if data != None%}
   <form>
-    <select>
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-    </select>
-    <select>
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-    </select>
-    <input type = "submit">
+    <div class = "out-information">{{data.nombres}}</div>
+    <div class = "out-information">{{data.apellidoPaterno}}</div>
+    <div class = "out-information">{{data.apellidoMaterno}}</div>
+    <div class = "out-information">{{data.numeroDocumento}}</div>
+    <input type = "submit" value = "AGREGAR">
   </form>
+  {%endif%}
+  <form method = "POST" action = "{{url_for('matricula')}}">
+    <select name = "curso_id_matricula">
+    {%for curso in cursos%}
+      <option value = "{{curso[0]}}">{{curso[0]}}-{{curso[1]}}</option>
+    {%endfor%}
+    </select>
+    <input type = "number" name = "dni_matricula" ReadOnly>
+    <input type = "submit" value = "MATRICULAR">
+  </form>
+  <div id = "message-container">
+    {{message}}
+  </div>
 </body>
 </html>
