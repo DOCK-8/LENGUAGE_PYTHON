@@ -4,26 +4,29 @@
   <link rel = "stylesheet" href = "url_for('static', filename='style.css')">
 </head>
 <body>
-  <form method = "POST" action = "{{url_for('dni')}}">
+  <form method = "POST">
+    <input type="hidden" name="form_type" value="buscar_dni">
     <input type = "number" name = "dni" placeholder = "Documento de Identidad">
     <input type = "submit" value = "BUSCAR">
   </form>
   {% if data != None%}
-  <form>
-    <div class = "out-information">{{data.nombres}}</div>
-    <div class = "out-information">{{data.apellidoPaterno}}</div>
-    <div class = "out-information">{{data.apellidoMaterno}}</div>
-    <div class = "out-information">{{data.numeroDocumento}}</div>
+  <form method = "POST">
+    <input type="hidden" name="form_type" value="agregar_dni">
+    <input type = "text" name = "data_name" class = "out-information" value = {{data.nombres}}>
+    <input type = "text" name = "data_firstname" class = "out-information" value = {{data.apellidoPaterno}}>
+    <input type = "text" name = "data_secondname" class = "out-information" value = {{data.apellidoMaterno}}>
+    <input type = "text" name = "data_dni" class = "out-information" value = {{data.numeroDocumento}}>
     <input type = "submit" value = "AGREGAR">
   </form>
   {%endif%}
-  <form method = "POST" action = "{{url_for('matricula')}}">
+  <form method = "POST">
+    <input type="hidden" name="form_type" value="registrar_matricula">
     <select name = "curso_id_matricula">
     {%for curso in cursos%}
       <option value = "{{curso[0]}}">{{curso[0]}}-{{curso[1]}}</option>
     {%endfor%}
     </select>
-    <input type = "number" name = "dni_matricula" ReadOnly>
+    <input type = "number" name = "dni_matricula" value = {{data.numeroDocumento}} ReadOnly>
     <input type = "submit" value = "MATRICULAR">
   </form>
   <div id = "message-container">
