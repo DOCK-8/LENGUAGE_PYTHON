@@ -46,16 +46,27 @@ def ShowTable(name):
     else:
         print("No conecto")
 
+def SearchElement(content):
+    my_sql = mysql.connector.connect(**enviroments)
+    if my_sql.is_connected():
+        print("Se conecto")
+        cursor = my_sql.cursor()
+        cursor.execute(f'SELECT * FROM estudiantes WHERE dni = %s',(content,))
+        rows = cursor.fetchall()
+        my_sql.close()
+        return rows
+    else:
+        print("No conecto")
+
 def GetMatriculasCursos(dni):
     my_sql = mysql.connector.connect(**enviroments)
     if my_sql.is_connected():
         print("Se conecto")
         cursor = my_sql.cursor()
-        cursor.execute(f'SELECT codigo_curso FROM matriculas WHERE dni = {dni}')
+        cursor.execute(f'SELECT codigo_curso,dni,fecha FROM matriculas WHERE dni = {dni}')
         rows = cursor.fetchall()
-        codigos = [fila[0] for fila in rows]
         my_sql.close()
-        return codigos
+        return rows
     else:
         print("No conecto")
 

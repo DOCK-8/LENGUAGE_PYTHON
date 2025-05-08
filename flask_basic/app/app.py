@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 
 from reniec import InfoPerson
-from database import InsertStudent, InsertMatricula, InsertCourses, ShowTable, GetMatriculasCursos 
+from database import InsertStudent, InsertMatricula, InsertCourses, ShowTable, GetMatriculasCursos, SearchElement 
 
 app = Flask(__name__)
 
@@ -16,14 +16,23 @@ def matricula():
         
         if form_type == "buscar_dni":
             number_dni = request.form.get("dni")
-            data_test = InfoPerson(number_dni).json()
-            list_cursos = GetMatriculasCursos(number_dni)
-            all_cursos = ShowTable("cursos")
-            enable_cursos = [
-                curso for curso in all_cursos
-                if curso[0] not in list_cursos and (curso[3] in list_cursos or curso[3] is None)
-            ]
-            return render_template('matricula.html', data=data_test, cursos=enable_cursos)
+            user_search = SearchElement(number_dni)
+            if not bool(user_search):
+                data_test = InfoPerson(number_dni).json()
+                return render_template('matricula.html', data=data_test, cursos=[], matriculas = [], message = "No se encuentra registrado en la Escuela")
+            else:
+                data_test = {
+                    "nombreCompleto":user_search[0][1],
+                    "numeroDocumento":user_search[0][0]
+                }
+                list_cursos = GetMatriculasCursos(number_dni)
+                list_cursos_code = [curso[0] for curso in list_cursos]
+                all_cursos = ShowTable("cursos")
+                enable_cursos = [
+                    curso for curso in all_cursos
+                    if curso[0] not in list_cursos_code and (curso[3] in list_cursos_code or curso[3] is None)
+                ]
+                return render_template('matricula.html', data=data_test, cursos=enable_cursos, matriculas = list_cursos)
 
         elif form_type == "registrar_matricula":
             curso = request.form.get("curso_id_matricula")
@@ -31,7 +40,7 @@ def matricula():
             InsertMatricula(dni, curso)
             return render_template('matricula.html', message=f"Matriculado {dni} en curso {curso}", data=None)
         elif form_type == "agregar_dni":
-            data_name = request.form.get("data_name")+" "+request.form.get("data_firstname")+" "+request.form.get("data_secondname")
+            data_name = request.form.get("data_name_complete")
             data_dni = request.form.get("data_dni")
             InsertStudent(data_dni, data_name)
             return render_template('matricula.html', data=None, message = f"Estudiante {data_name} registrado")

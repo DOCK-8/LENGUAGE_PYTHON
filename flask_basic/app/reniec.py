@@ -2,7 +2,7 @@ import requests
 
 def InfoPerson(dni):
     url = "https://api.apis.net.pe/"
-    token = "Bearer TOKEN"
+    token = "Bearer apis-token-14861.03jtwiQ87KeztWfVytRc0O3QxrmB7R0P"
     headers = {
         'Authorization' : token,
         'Accept' : 'application/json'

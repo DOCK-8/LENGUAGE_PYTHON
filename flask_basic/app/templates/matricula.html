@@ -12,9 +12,7 @@
   {% if data != None%}
   <form method = "POST">
     <input type="hidden" name="form_type" value="agregar_dni">
-    <input type = "text" name = "data_name" class = "out-information" value = {{data.nombres}}>
-    <input type = "text" name = "data_firstname" class = "out-information" value = {{data.apellidoPaterno}}>
-    <input type = "text" name = "data_secondname" class = "out-information" value = {{data.apellidoMaterno}}>
+    <input type = "text" name = "data_name_complete" class = "out-information" value = {{data.nombreCompleto}}>
     <input type = "text" name = "data_dni" class = "out-information" value = {{data.numeroDocumento}}>
     <input type = "submit" value = "AGREGAR">
   </form>
@@ -32,5 +30,19 @@
   <div id = "message-container">
     {{message}}
   </div>
+  <table>
+    <tr>
+      <th>DNI</th>
+      <th>COURSE</th>
+      <th>DATE</th>
+    </tr>
+    {%for matricula in matriculas %}
+    <tr>
+      <td>{{matricula[0]}}</td>
+      <td>{{matricula[1]}}</td>
+      <td>{{matricula[2]}}</td>
+    </tr>
+    {%endfor%}
+  </table>
 </body>
 </html>
