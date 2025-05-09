@@ -1,33 +1,105 @@
-#nav-header{
-  background: #000;
-  color: #fff;
-  padding: .3em 1em;
+body {
+  font-family: Arial, sans-serif;
+  margin: 40px;
+  background-color: #f9f9f9;
 }
-#nav-header > ul{
-  display: flex;
-  justify-content: end;
-  gap: 3em;
+
+form {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #e8f0fe;
+  border-radius: 8px;
+  box-shadow: 0 0 5px #ccc;
+}
+
+input[type="text"], input[type="number"], select {
+  padding: 8px;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: 1px solid #aaa;
+}
+
+input[type="submit"] {
+  padding: 8px 12px;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #3367d6;
+}
+
+#message-container {
+  padding: 10px;
+  margin-bottom: 20px;
+  color: #333;
+  background-color: #fff3cd;
+  border: 1px solid #ffeeba;
+  border-radius: 4px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+}
+
+th {
+  background-color: #4285f4;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Estilo del encabezado */
+header {
+  background-color: #1a73e8;
+  padding: 15px 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+/* Contenedor de navegación */
+#nav-header ul {
   list-style-type: none;
-  letter-spacing: .1em;
-  font-family: sans-serif;
-}
-#nav-header > ul > li:hover{
-  text-decoration: underline;
-  color: #DDD;
-}
-main{
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-template-columns: 1fr 1fr 1fr;
-}
-#nav-courses{
+  margin: 0;
+  padding: 0;
   display: flex;
-  justify-content: center;
-  align-content: center;
-  background: linear-gradient(to left,#0005, transparent, #0005);
 }
-#nav-students{
+
+/* Estilo de los <li> y enlaces */
+#nav-header li {
   display: flex;
-  justify-content: center;
-  align-content: center;
+  gap: 10px;
+}
+
+#nav-header a {
+  background-color: #ffffff;
+  color: #1a73e8;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border: 2px solid transparent;
+}
+
+#nav-header a:hover {
+  background-color: #e8f0fe;
+  color: #0b57d0;
+  border-color: #c3d6f5;
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel = "stylesheet" href = "url_for('static', filename='style.css')">
+  <link rel = "stylesheet" href = "{{url_for('static', filename='style.css')}}">
 </head>
 <body>
   {% if message%}
@@ -22,7 +22,7 @@
     <input type = "submit" value = "AGREGAR">
   </form>
   {%endif%}
-  <form method = "POST">
+  <form method = "POST" action = "/matricula">
     <input type="hidden" name="form_type" value="registrar_matricula">
     <select name = "curso_id_matricula">
     {%for curso in cursos%}
