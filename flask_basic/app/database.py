@@ -63,7 +63,7 @@ def GetMatriculasCursos(dni):
     if my_sql.is_connected():
         print("Se conecto")
         cursor = my_sql.cursor()
-        cursor.execute(f'SELECT codigo_curso,dni,fecha FROM matriculas WHERE dni = {dni}')
+        cursor.execute(f'SELECT * FROM matriculas WHERE dni = {dni}')
         rows = cursor.fetchall()
         my_sql.close()
         return rows
@@ -101,3 +101,11 @@ def InsertMatricula(dni, code):
            "VALUES (%s, %s)")
     datas = (dni, code)
     InsertElement(instruction, datas)
+def DeleteMatricula(id):
+    my_sql = mysql.connector.connect(**enviroments)
+    if my_sql.is_connected():
+        cursor = my_sql.cursor()
+        cursor.execute("DELETE FROM matriculas WHERE id = %s", (id,))
+        my_sql.commit()
+        my_sql.close()
+

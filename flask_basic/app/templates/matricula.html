@@ -4,13 +4,18 @@
   <link rel = "stylesheet" href = "url_for('static', filename='style.css')">
 </head>
 <body>
-  <form method = "POST">
+  {% if message%}
+  <div id = "message-container">
+    {{message}}
+  </div>
+  {% endif %}
+  <form method = "POST" action = "/matricula">
     <input type="hidden" name="form_type" value="buscar_dni">
     <input type = "number" name = "dni" placeholder = "Documento de Identidad">
     <input type = "submit" value = "BUSCAR">
   </form>
   {% if data != None%}
-  <form method = "POST">
+  <form method = "POST" action = "/matricula">
     <input type="hidden" name="form_type" value="agregar_dni">
     <input type = "text" name = "data_name_complete" class = "out-information" value = {{data.nombreCompleto}}>
     <input type = "text" name = "data_dni" class = "out-information" value = {{data.numeroDocumento}}>
@@ -27,9 +32,10 @@
     <input type = "number" name = "dni_matricula" value = {{data.numeroDocumento}} ReadOnly>
     <input type = "submit" value = "MATRICULAR">
   </form>
-  <div id = "message-container">
-    {{message}}
-  </div>
+  <label>
+    <input type="checkbox" name="forzar_eliminacion">
+    Eliminar también cursos dependientes
+  </label>
   <table>
     <tr>
       <th>DNI</th>
@@ -38,9 +44,17 @@
     </tr>
     {%for matricula in matriculas %}
     <tr>
-      <td>{{matricula[0]}}</td>
       <td>{{matricula[1]}}</td>
       <td>{{matricula[2]}}</td>
+      <td>{{matricula[3]}}</td>
+      <td>
+        <form method = "POST" action = '/desmatricular'>
+          <input type = "hidden" name = "matricula" value = {{matricula[0]}}>
+          <input type = "hidden" name = "matricula_course" value = {{matricula[2]}}>
+          <input type = "hidden" name = "matricula_dni" value = {{matricula[1]}}>
+          <input type = "submit" value = "DESMATRICULAR">
+        </form>
+      </td>
     </tr>
     {%endfor%}
   </table>
